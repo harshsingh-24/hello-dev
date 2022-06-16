@@ -1,0 +1,25 @@
+version: 0.1
+component: build
+timeoutInSeconds: 6000
+shell: bash
+runAs: app-user
+env:
+  variables:
+    "minor_version" : "20"
+  exportedVariables:
+    - minor_version
+ 
+steps:
+  - type: Command
+    name: "Build Source 1"
+    timeoutInSeconds: 400
+    runAs: app-user
+    command: |
+      echo "hello world"
+      echo $minor_version
+  - type: Command
+    name: "Build Source 2"
+    timeoutInSeconds: 400
+    command: |
+      echo "hello world"
+      echo $minor_version
