@@ -13,7 +13,6 @@ steps:
   - type: Command
     name: "Build Source 1"
     timeoutInSeconds: 400
-    runAs: app-user
     command: |
       echo "hello world"
       echo $minor_version
