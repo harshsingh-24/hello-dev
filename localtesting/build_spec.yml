@@ -16,6 +16,7 @@ steps:
     runAs: root
     command: |
       echo "hello world"
+      echo "harsh singh jadon"
       echo $minor_version
   - type: Command
     name: "Build Source 2"
