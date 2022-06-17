@@ -2,7 +2,7 @@ version: 0.1
 component: build
 timeoutInSeconds: 6000
 shell: bash
-runAs: harsh
+runAs: app-user
 env:
   variables:
     "minor_version" : "20"
@@ -13,12 +13,12 @@ steps:
   - type: Command
     name: "Build Source 1"
     timeoutInSeconds: 400
-    runAs: root
     command: |
       echo "hello world"
-      echo "harsh singh jadon"
       echo $minor_version
-- type: Command
+      echo "Harsh Singh Jadon"
+      echo "This is so awesome. Ganpati Bappa moriya"
+  - type: Command
     name: "Build Source 2"
     timeoutInSeconds: 400
     command: |
