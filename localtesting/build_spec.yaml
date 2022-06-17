@@ -5,9 +5,9 @@ shell: bash
 runAs: app-user
 env:
   variables:
-    "minor_version" : "20"
+    MINOR_VERSION : "20"
   exportedVariables:
-    - minor_version
+    - MINOR_VERSION
  
 steps:
   - type: Command
@@ -15,12 +15,13 @@ steps:
     timeoutInSeconds: 400
     command: |
       echo "hello world"
-      echo $minor_version
+      echo $MINOR_VERSION
       echo "Harsh Singh Jadon"
       echo "This is so awesome. Ganpati Bappa moriya"
+      
   - type: Command
     name: "Build Source 2"
     timeoutInSeconds: 400
     command: |
       echo "hello world"
-      echo $minor_version
+      echo $MINOR_VERSION
