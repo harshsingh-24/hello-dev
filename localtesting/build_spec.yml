@@ -15,8 +15,12 @@ steps:
   - type: Command
     name: "Build Source 1"
     timeoutInSeconds: 400
+    runAs: user
     command: |
+      echo $USER
+      echo $USERNAME
       echo "hello world"
+      echo "ganpati bappa moriya"
       echo $minor_version
       minor_version=1
       echo “test”> abc.txt
