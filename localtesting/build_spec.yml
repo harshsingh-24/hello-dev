@@ -29,3 +29,7 @@ steps:
       docker build -t iad.ocir.io/id204we8d65n/bugbashcontainer .
       echo "hello world"
       echo $minor_version
+outputArtifacts:
+  - name: bugbashArtifact
+    type: DOCKER_IMAGE
+    location: iad.ocir.io/id204we8d65n/bugbashcontainer
