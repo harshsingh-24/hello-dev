@@ -32,9 +32,6 @@ steps:
       echo "hello world"
       echo $minor_version
 outputArtifacts:
-  - name: bugbashKubeManifest
-    type: BINARY
-    location: helloWorld-oke.yaml
   - name: bugbashArtifact
     type: DOCKER_IMAGE
     location: iad.ocir.io/id204we8d65n/bugbashcontainer
