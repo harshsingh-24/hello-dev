@@ -33,6 +33,7 @@ steps:
     timeoutInSeconds: 400
     command: |
       whoami
+      echo "two steps"
       docker build -t iad.ocir.io/id204we8d65n/bugbashcontainer .
       echo "hello world"
       echo $minor_version
