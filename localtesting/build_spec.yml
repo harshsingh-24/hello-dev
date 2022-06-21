@@ -15,7 +15,7 @@ steps:
   - type: Command
     name: "Build Source 1"
     timeoutInSeconds: 400
-    runAs: harsh
+    runAs: ocarun
     command: |
       echo $USER
       echo $USERNAME
