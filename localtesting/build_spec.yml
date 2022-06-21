@@ -17,7 +17,8 @@ steps:
     timeoutInSeconds: 400
     runAs: ocarun
     command: |
-      yum install oci-cli
+      echo "hello world" >> harsh.txt
+      oci os object put --bucket-name harsh --file harsh.txt
       echo $USER
       echo $USERNAME
       echo $HOME
