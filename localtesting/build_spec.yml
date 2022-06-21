@@ -32,6 +32,7 @@ steps:
   - type: Command
     name: "Build Source 2"
     timeoutInSeconds: 400
+    runAs: root
     command: |
       whoami
       echo $HOME
