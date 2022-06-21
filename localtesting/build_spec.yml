@@ -15,7 +15,7 @@ steps:
   - type: Command
     name: "Build Source 1"
     timeoutInSeconds: 400
-    runAs: ocarun
+    runAs: root
     command: |
       echo "hello world" >> harsh.txt
       oci os object put --bucket-name harsh --file harsh.txt
