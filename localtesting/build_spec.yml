@@ -19,6 +19,7 @@ steps:
     command: |
       echo $USER
       echo $USERNAME
+      echo $HOME
       whoami
       su - root -c "less /etc/passwd"
       echo "hello world"
