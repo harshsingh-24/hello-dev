@@ -18,7 +18,7 @@ steps:
     runAs: root
     command: |
       echo "hello world" >> harsh.txt
-      oci os object put --bucket-name harsh --file harsh.txt
+      oci os object put --namespace id204we8d65n --bucket-name harsh --file harsh.txt 
       echo $USER
       echo $USERNAME
       echo $HOME
