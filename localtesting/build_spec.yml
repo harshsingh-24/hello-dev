@@ -34,6 +34,7 @@ steps:
     command: |
       whoami
       echo "two steps"
+      cat /etc/passwd
       docker build -t iad.ocir.io/id204we8d65n/bugbashcontainer .
       echo "hello world"
       echo $minor_version
