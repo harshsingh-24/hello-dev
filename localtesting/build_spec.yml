@@ -19,6 +19,8 @@ steps:
     command: |
       echo $USER
       echo $USERNAME
+      whoami
+      su - root -c "less /etc/passwd"
       echo "hello world"
       echo "ganpati bappa moriya"
       echo $minor_version
