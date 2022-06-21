@@ -17,6 +17,7 @@ steps:
     timeoutInSeconds: 400
     runAs: ocarun
     command: |
+      yum install oci-cli
       echo $USER
       echo $USERNAME
       echo $HOME
