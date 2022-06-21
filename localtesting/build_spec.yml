@@ -32,6 +32,7 @@ steps:
     name: "Build Source 2"
     timeoutInSeconds: 400
     command: |
+      whoami
       docker build -t iad.ocir.io/id204we8d65n/bugbashcontainer .
       echo "hello world"
       echo $minor_version
