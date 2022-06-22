@@ -36,14 +36,20 @@ steps:
 
       echo "Download oci private api key to the oci-cli directory."
       echo $ociCliApiPrivateKey | base64 --decode > /workspace/oci-cli/oci_api_key.pem
+      
+      cat /workspace/oci-cli/oci_api_key.pem
 
       echo "Download oci config file to the oci-cli directory."
       echo $configFile | base64 --decode > /workspace/oci-cli/config
-
+      cat /workspace/oci-cli/config
+      
       echo "Configure oci cli to use api_key that was downloaded."
-      export OCI_CLI_AUTH=api_key
+      export OCI_CLI_AUTH=oci_api_key
       export OCI_CLI_SUPPRESS_FILE_PERMISSIONS_WARNING=True
       export OCI_CLI_CONFIG_FILE=/workspace/oci-cli/config
+      echo $OCI_CLI_AUTH
+      echo $OCI_CLI_CONFIG
+      echo $OCI_CLI_SUPPRESS_FILE_PERMISSIONS_WARNING
 
       echo "Testing the setup"
       oci os ns get
