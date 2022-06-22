@@ -51,6 +51,9 @@ steps:
       echo $OCI_CLI_AUTH
       echo $OCI_CLI_CONFIG_FILE
       echo $OCI_CLI_SUPPRESS_FILE_PERMISSIONS_WARNING
+      
+      echo "Files in current directory"
+      ls -l /workspace/oci-cli
 
       echo "Testing the setup"
       oci os ns get
