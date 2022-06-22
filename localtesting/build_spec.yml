@@ -45,7 +45,7 @@ steps:
       echo $configFile
       cat /workspace/oci-cli/config
       
-      sleep(10000)
+      sleep 10000
       
       echo "Configure oci cli to use api_key that was downloaded."
       export OCI_CLI_AUTH=api_key
