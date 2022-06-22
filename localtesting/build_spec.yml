@@ -58,6 +58,8 @@ steps:
       oci --version
       echo "Java version is:- "
       java -version
+      echo "Present working directory is:-"
+      pwd
 
       echo "Testing the setup"
       oci os ns get
