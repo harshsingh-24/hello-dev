@@ -19,6 +19,7 @@ steps:
       echo "ganpati bappa moriya"
       whoami
       cat /etc/passwd
+      pwd
       
       echo "Setup oci-cli directory to store oci private api key and config file."
       mkdir -p /workspace/oci-cli
