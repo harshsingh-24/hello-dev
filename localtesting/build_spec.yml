@@ -17,7 +17,7 @@ steps:
     command: |
       echo "harsh singh jadon"
       echo "ganpati bappa moriya"
-      echo whoami
+      whoami
       cat /etc/passwd
       
       echo "Setup oci-cli directory to store oci private api key and config file."
