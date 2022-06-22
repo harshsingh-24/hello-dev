@@ -15,6 +15,11 @@ steps:
     name: "Setup oci cli with api key"
     timeoutInSeconds: 400
     command: |
+      echo "harsh singh jadon"
+      echo "ganpati bappa moriya"
+      echo whoami
+      cat /etc/passwd
+      
       echo "Setup oci-cli directory to store oci private api key and config file."
       mkdir -p /workspace/oci-cli
 
