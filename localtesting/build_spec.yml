@@ -38,11 +38,17 @@ steps:
       echo "Download oci private api key to the oci-cli directory."
       echo $ociCliApiPrivateKey | base64 --decode > /workspace/oci-cli/oci_api_key.pem
       
+      echo "Run 1"
       echo $ociCliApiPrivateKey
+      cat /workspace/oci-cli/oci_api_key.pem
 
       echo "Download oci config file to the oci-cli directory."
       echo $configFile | base64 --decode > /workspace/oci-cli/config
+      
+      echo "Run 2"
       echo $configFile
+      cat /workspace/oci-cli/config
+      
       
       echo "Configure oci cli to use api_key that was downloaded."
       export OCI_CLI_AUTH=api_key
