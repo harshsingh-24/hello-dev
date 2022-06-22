@@ -54,6 +54,7 @@ steps:
       
       echo "Files in current directory"
       ls -l /workspace/oci-cli
+      echo "OCI version is:- "
       oci --version
 
       echo "Testing the setup"
