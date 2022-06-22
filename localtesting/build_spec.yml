@@ -18,8 +18,18 @@ steps:
       echo "harsh singh jadon"
       echo "ganpati bappa moriya"
       whoami
-      cat /etc/passwd
       pwd
+      echo "Files in current directory"
+      ls -l
+      echo "Files in one up"
+      ls -l ..
+      echo "Files in two up"
+      ls -l ../..
+      echo "Files in three up"
+      ls -l ../../..
+      echo "Files in root"
+      ls -l /
+      
       
       echo "Setup oci-cli directory to store oci private api key and config file."
       mkdir -p /workspace/oci-cli
