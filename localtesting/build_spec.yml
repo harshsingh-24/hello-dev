@@ -22,12 +22,6 @@ steps:
       pwd
       echo "Files in current directory"
       ls -l
-      echo "Files in one up"
-      ls -l ..
-      echo "Files in two up"
-      ls -l ../..
-      echo "Files in three up"
-      ls -l ../../..
       echo "Files in root"
       ls -l /
       
