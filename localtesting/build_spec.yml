@@ -7,8 +7,8 @@ shell: bash
 env:
   # base64 encoded config file and private key are stored in vault
   vaultVariables:
-    configFile : ocid1.vaultsecret.oc1.iad.amaaaaaa34lgq7aamdxdpbbjzbkday7c6kgdixvbugji2f2vjhhybqpk6phq
-    ociCliApiPrivateKey : ocid1.vaultsecret.oc1.iad.amaaaaaa34lgq7aanhv3ct3b2avklub7ayj2rmaetbc6lqdyrzh62doqqbka
+    configFile : ocid1.vaultsecret.oc1.phx.amaaaaaab6fywtyalawzy7db736fyfx7hwbbsjziohzysb4r4dxamz3rzu7a
+    ociCliApiPrivateKey : ocid1.vaultsecret.oc1.phx.amaaaaaab6fywtyatx6xth7ij2nd5ukza255dp3qdqextk6ca5aax7rdijia
 
 steps:
   - type: Command
