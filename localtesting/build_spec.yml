@@ -44,7 +44,7 @@ steps:
       cat /workspace/oci-cli/config
       
       echo "Configure oci cli to use api_key that was downloaded."
-      export OCI_CLI_AUTH=oci_api_key
+      export OCI_CLI_AUTH=api_key
       export OCI_CLI_SUPPRESS_FILE_PERMISSIONS_WARNING=True
       export OCI_CLI_CONFIG_FILE=/workspace/oci-cli/config
       echo $OCI_CLI_AUTH
