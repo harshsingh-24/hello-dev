@@ -1,6 +1,6 @@
 version: 0.1
 component: build
-timeoutInSeconds: 6000
+timeoutInSeconds: 10000
 runAs: root
 shell: bash
 
@@ -13,7 +13,7 @@ env:
 steps:
   - type: Command
     name: "Setup oci cli with api key"
-    timeoutInSeconds: 400
+    timeoutInSeconds: 10000
     runAs: ocarun
     command: |
       echo "harsh singh jadon"
