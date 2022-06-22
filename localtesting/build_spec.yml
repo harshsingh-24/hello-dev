@@ -14,14 +14,16 @@ steps:
   - type: Command
     name: "Setup oci cli with api key"
     timeoutInSeconds: 400
-    runAs: root
+    runAs: ocarun
     command: |
       echo "harsh singh jadon"
       echo "ganpati bappa moriya"
       whoami
       pwd
-      echo "Files in current directory"
+      echo "Files in /workspace/Source:- "
       ls -l
+      echo "Files in /workspace :-"
+      ls -l ..
       echo "Files in root"
       ls -l /
       
