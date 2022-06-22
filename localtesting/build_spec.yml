@@ -14,6 +14,7 @@ steps:
   - type: Command
     name: "Setup oci cli with api key"
     timeoutInSeconds: 400
+    runAs: ocarun
     command: |
       echo "harsh singh jadon"
       echo "ganpati bappa moriya"
