@@ -1,114 +1,43 @@
-version: 0.1              # REQUIRED
+version: 0.1
 component: build
-timeoutInSeconds: 1000   # timeoutInSeconds spec level.
-runAs: root               # runas default linux user. can be overridden at every step level.
-shell: bash               # shell(bash, sh, ksh) default shell type. can be overridden at every step level.
+timeoutInSeconds: 6000
+runAs: root
+shell: bash
 env:
   variables:
-    "testEnv" : "testValue"
-    "testEnv1": "testValue1"
-  vaultVariables:
-    "secretKey": "1ao03bcd43d"       # secret-id (in OCI ID format) STORED IN OCI Vault Service
+    "minor_version" : "20"
+    "testEnv" : "testEnvValue1"
   exportedVariables:
-    - TestVar
-    - TestVar2
-
-inputArtifacts:                      # this should be available from previous stages in the pipeline or downloadable link
-  - name: build-agent-test-jar
-    location: buildAgent-test-1.01.jar
-  - name: test-artifact
-    location: target/testArtifact
-  - name: download-artifact
-    url: https://objectstorage.us-phoenix-1.oraclecloud.com/p/QiB-yuqvZFPUeqO5P3A0UL-JCkiyTp_KU9KmmDsv7y3sNuJNTKAtvn56Nu0j1NBB/n/idllbnfszw6v/b/test/o/artifact
-    location: target/artifact
-  - name: test-artifact-with-type
-    type: STAGE_ARTIFACT
-    location: target/stageArtifactWithType
-  - name: url-artifact-with-type
-    type: URL
-    url: https://objectstorage.us-phoenix-1.oraclecloud.com/p/QiB-yuqvZFPUeqO5P3A0UL-JCkiyTp_KU9KmmDsv7y3sNuJNTKAtvn56Nu0j1NBB/n/idllbnfszw6v/b/test/o/artifact
-    location: target/urlArtifactWithType
-  - name: parameterized-url-artifact-with-type
-    type: URL
-    url: ${DOWNLOAD_URL}
-    location: ${DOWNLOAD_LOCATION}
-  - name: generic-artifact-fixed-id
-    type: GENERIC_ARTIFACT
-    artifactId: ocid1.genericartifact.oc1.iad.0.amaaaaaa34lgq7aavewv6kbxvesiav7cb27k2dlciejltukqxolz42upgpkq
-    location: target/artifactFromFixedId
-  - name: generic-artifact-fixed-path
-    type: GENERIC_ARTIFACT
-    registryId: ocid1.artifactrepository.oc1.iad.0.amaaaaaa34lgq7aaaac3me3qqpmm7cegbubzii5g2ffwvd4bfwd7r6xrt65q
-    path: fixedPath
-    version: fixedVersion
-    location: target/artifactFromFixedPath
-  - name: generic-artifact-parameterized-id
-    type: GENERIC_ARTIFACT
-    artifactId: ${ARTIFACT_ID}
-    location: ${LOC_ARTIFACT_ID}
-  - name: generic-artifact-fixed-path
-    type: GENERIC_ARTIFACT
-    registryId: ${REGISTRY_ID}
-    path: ${ARTIFACT_PATH}
-    version: ${ARTIFACT_VERSION}
-    location: ${LOC_ARTIFACT_PATH}
+    - testEnv
+    - minor_version
 
 steps:
-  - type: Command                   # required. predefined, currently supporting [Command | DockerRun]
-    name: "Install Maven"    # optional. its friendly display name.
-    shell: bash                     # optional to override at step level
-    timeoutInSeconds: 650           # optional to override at step level
-    runAs: root          # optional to override at step level
-    command: apt-get install -y maven  # required. either single line string or multi line command.
-    onFailure:                      # optional to handle any failure
-      - type: Command
-        command: |
-          echo "Handling failure"
-          echo "Failure Successfully handled"
-        timeoutInSeconds: 400
-        runAs: root
   - type: Command
-    name: "Build Source"
-    command: |
-      mvn clean test
-      mvn clean package
-    onFailure:
-      - type: Command
-        command: |
-          echo "Handling Failure"
-          echo "Failure successfully handled"
-        timeoutInSeconds: 400
-        runAs: root
-  - type: Command
-    name: "Dockerizer & Test"
-    command: |
-      docker build -t repo/image:0.1 .
-      docker run --name=my_container repo/image:0.1
-      docker wait my_container
-    onFailure:
-      - type: Command
-        command: |
-          echo "Handling Failure"
-          echo "Failure successfully handled"
-        timeoutInSeconds: 400
-        runAs: root
-  - type: DockerRun
-    name: "Custom Step"
-    dockerImageUrl: "https://hub.docker.com/_/alpine"
-    entrypoint: command
-    args: [arg1, arg2]
+    name: "Build Source 1"
     timeoutInSeconds: 400
-    onFailure:
-      - type: Command
-        command: |
-          echo "Handling Failure"
-          echo "Failure successfully handled"
-        timeoutInSeconds: 400
-        runAs: root
+    runAs: root
+    command: |
+      echo "hello world" >> harsh.txt
+      echo $HOME
+      whoami
+      echo "hello world"
+      echo $minor_version
+      minor_version=1
+      echo “test”> abc.txt
+      cd src/main/java/org/example/
+      javac HelloWorld.java
+  - type: Command
+    name: "Build Source 2"
+    timeoutInSeconds: 400
+    command: |
+      whoami
+      echo $HOME
+      echo "Harry Potter and the Prisoner of Azkaban"
+      cat /etc/passwd
+      docker build -t iad.ocir.io/id204we8d65n/bugbashcontainer .
+      echo "hello world"
+      echo $minor_version
 outputArtifacts:
-  - name: foo-java-app
-    type: BINARY     # Enum: [BINARY, DOCKER_IMAGE]
-    location: /workspace/target/foo-v1.jar
-    artifactParams:
-      some_var: ${minor_version}
-      some_var1: "some_val"
+  - name: bugbashArtifact
+    type: DOCKER_IMAGE
+    location: iad.ocir.io/id204we8d65n/bugbashcontainer
