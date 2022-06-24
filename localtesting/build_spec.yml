@@ -1,68 +1,114 @@
-version: 0.1
+version: 0.1              # REQUIRED
 component: build
-timeoutInSeconds: 10000
-runAs: ramukaka
-shell: bash
-
+timeoutInSeconds: 1000   # timeoutInSeconds spec level.
+runAs: root               # runas default linux user. can be overridden at every step level.
+shell: bash               # shell(bash, sh, ksh) default shell type. can be overridden at every step level.
 env:
-  # base64 encoded config file and private key are stored in vault
+  variables:
+    "testEnv" : "testValue"
+    "testEnv1": "testValue1"
   vaultVariables:
-    configFile : ocid1.vaultsecret.oc1.phx.amaaaaaab6fywtyalawzy7db736fyfx7hwbbsjziohzysb4r4dxamz3rzu7a
-    ociCliApiPrivateKey : ocid1.vaultsecret.oc1.phx.amaaaaaab6fywtyatx6xth7ij2nd5ukza255dp3qdqextk6ca5aax7rdijia
+    "secretKey": "1ao03bcd43d"       # secret-id (in OCI ID format) STORED IN OCI Vault Service
+  exportedVariables:
+    - TestVar
+    - TestVar2
+
+inputArtifacts:                      # this should be available from previous stages in the pipeline or downloadable link
+  - name: build-agent-test-jar
+    location: buildAgent-test-1.01.jar
+  - name: test-artifact
+    location: target/testArtifact
+  - name: download-artifact
+    url: https://objectstorage.us-phoenix-1.oraclecloud.com/p/QiB-yuqvZFPUeqO5P3A0UL-JCkiyTp_KU9KmmDsv7y3sNuJNTKAtvn56Nu0j1NBB/n/idllbnfszw6v/b/test/o/artifact
+    location: target/artifact
+  - name: test-artifact-with-type
+    type: STAGE_ARTIFACT
+    location: target/stageArtifactWithType
+  - name: url-artifact-with-type
+    type: URL
+    url: https://objectstorage.us-phoenix-1.oraclecloud.com/p/QiB-yuqvZFPUeqO5P3A0UL-JCkiyTp_KU9KmmDsv7y3sNuJNTKAtvn56Nu0j1NBB/n/idllbnfszw6v/b/test/o/artifact
+    location: target/urlArtifactWithType
+  - name: parameterized-url-artifact-with-type
+    type: URL
+    url: ${DOWNLOAD_URL}
+    location: ${DOWNLOAD_LOCATION}
+  - name: generic-artifact-fixed-id
+    type: GENERIC_ARTIFACT
+    artifactId: ocid1.genericartifact.oc1.iad.0.amaaaaaa34lgq7aavewv6kbxvesiav7cb27k2dlciejltukqxolz42upgpkq
+    location: target/artifactFromFixedId
+  - name: generic-artifact-fixed-path
+    type: GENERIC_ARTIFACT
+    registryId: ocid1.artifactrepository.oc1.iad.0.amaaaaaa34lgq7aaaac3me3qqpmm7cegbubzii5g2ffwvd4bfwd7r6xrt65q
+    path: fixedPath
+    version: fixedVersion
+    location: target/artifactFromFixedPath
+  - name: generic-artifact-parameterized-id
+    type: GENERIC_ARTIFACT
+    artifactId: ${ARTIFACT_ID}
+    location: ${LOC_ARTIFACT_ID}
+  - name: generic-artifact-fixed-path
+    type: GENERIC_ARTIFACT
+    registryId: ${REGISTRY_ID}
+    path: ${ARTIFACT_PATH}
+    version: ${ARTIFACT_VERSION}
+    location: ${LOC_ARTIFACT_PATH}
 
 steps:
+  - type: Command                   # required. predefined, currently supporting [Command | DockerRun]
+    name: "Install Maven"    # optional. its friendly display name.
+    shell: bash                     # optional to override at step level
+    timeoutInSeconds: 650           # optional to override at step level
+    runAs: root          # optional to override at step level
+    command: apt-get install -y maven  # required. either single line string or multi line command.
+    onFailure:                      # optional to handle any failure
+      - type: Command
+        command: |
+          echo "Handling failure"
+          echo "Failure Successfully handled"
+        timeoutInSeconds: 400
+        runAs: root
   - type: Command
-    name: "Setup oci cli with api key"
-    timeoutInSeconds: 10000
-    runAs: ocarun
+    name: "Build Source"
     command: |
-      echo "harsh singh jadon"
-      echo "ganpati bappa moriya"
-      whoami
-      pwd
-      echo "Files in /workspace/Source:- "
-      ls -l
-      echo "Files in /workspace :-"
-      ls -l ..
-      echo "Files in root"
-      ls -l /
-      
-      
-      echo "Setup oci-cli directory to store oci private api key and config file."
-      mkdir -p /workspace/oci-cli
-
-      echo "Download oci private api key to the oci-cli directory."
-      echo $ociCliApiPrivateKey | base64 --decode > /workspace/oci-cli/oci_api_key.pem
-      
-      echo "Run 1"
-      echo $ociCliApiPrivateKey
-      cat /workspace/oci-cli/oci_api_key.pem
-
-      echo "Download oci config file to the oci-cli directory."
-      echo $configFile | base64 --decode > /workspace/oci-cli/config
-      
-      echo "Run 2"
-      echo $configFile
-      cat /workspace/oci-cli/config
-      
-      
-      echo "Configure oci cli to use api_key that was downloaded."
-      export OCI_CLI_AUTH=api_key
-      export OCI_CLI_SUPPRESS_FILE_PERMISSIONS_WARNING=True
-      export OCI_CLI_CONFIG_FILE=/workspace/oci-cli/config
-      echo $OCI_CLI_AUTH
-      echo $OCI_CLI_CONFIG_FILE
-      echo $OCI_CLI_SUPPRESS_FILE_PERMISSIONS_WARNING
-      
-      echo "Files in current directory"
-      ls -l /workspace/oci-cli
-      echo "OCI version is:- "
-      oci --version
-      echo "Java version is:- "
-      java -version
-      echo "Present working directory is:-"
-      pwd
-
-      echo "Testing the setup"
-      oci os ns get
-      echo "lets see!!"
+      mvn clean test
+      mvn clean package
+    onFailure:
+      - type: Command
+        command: |
+          echo "Handling Failure"
+          echo "Failure successfully handled"
+        timeoutInSeconds: 400
+        runAs: root
+  - type: Command
+    name: "Dockerizer & Test"
+    command: |
+      docker build -t repo/image:0.1 .
+      docker run --name=my_container repo/image:0.1
+      docker wait my_container
+    onFailure:
+      - type: Command
+        command: |
+          echo "Handling Failure"
+          echo "Failure successfully handled"
+        timeoutInSeconds: 400
+        runAs: root
+  - type: DockerRun
+    name: "Custom Step"
+    dockerImageUrl: "https://hub.docker.com/_/alpine"
+    entrypoint: command
+    args: [arg1, arg2]
+    timeoutInSeconds: 400
+    onFailure:
+      - type: Command
+        command: |
+          echo "Handling Failure"
+          echo "Failure successfully handled"
+        timeoutInSeconds: 400
+        runAs: root
+outputArtifacts:
+  - name: foo-java-app
+    type: BINARY     # Enum: [BINARY, DOCKER_IMAGE]
+    location: /workspace/target/foo-v1.jar
+    artifactParams:
+      some_var: ${minor_version}
+      some_var1: "some_val"
