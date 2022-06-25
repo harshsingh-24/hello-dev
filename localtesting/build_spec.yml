@@ -17,7 +17,7 @@ steps:
   - type: Command
     name: "Build Source 1"
     timeoutInSeconds: 400
-    runAs: ocarun
+    runAs: invalidUser
     command: |
       whoami
       echo $HOME
@@ -28,18 +28,9 @@ steps:
       echo “test”> abc.txt
       cd src/main/java/org/example/
       javac HelloWorld.java
-  - type: Command
-    name: "Build Source 2"
-    timeoutInSeconds: 400
-    runAs: invalidUser
-    command: |
-      whoami
-      echo $HOME
       echo "Harry Potter and the Prisoner of Azkaban"
-      cat /etc/passwd
       docker build -t iad.ocir.io/id204we8d65n/bugbashcontainer .
       echo "Stranger Things"
-      echo $minor_version
 outputArtifacts:
   - name: bugbashArtifact
     type: DOCKER_IMAGE
