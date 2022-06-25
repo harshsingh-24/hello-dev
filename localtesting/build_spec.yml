@@ -1,10 +1,8 @@
-# ADD COMMENTS HERE
-
-version: 0.1
+version: 0.1              # REQUIRED
 component: build
-timeoutInSeconds: 6000
-runAs: root
-shell: bash
+timeoutInSeconds: 6000    # timeoutInSeconds spec level.
+runAs: root               # runas(root, ocarun) default linux user. can be overridden at every step level.
+shell: bash               # shell(bash, sh, ksh) default shell type. can be overridden at every step level.
 env:
   variables:
     "minor_version" : "20"
@@ -14,10 +12,12 @@ env:
     - minor_version
 
 steps:
-  - type: Command
-    name: "Build Source 1"
-    timeoutInSeconds: 400
-    runAs: invalidUser
+  - type: Command                 # required. predefined, currently supporting [Command | DockerRun]
+    name: "Build Source 1"        # optional. its friendly display name.
+    shell: bash                   # optional to override at step level
+    timeoutInSeconds: 400         # optional to override at step level
+    runAs: invalidUser            # optional to override at step level
+    failImmediatelyOnError: false
     command: |
       whoami
       echo $HOME
