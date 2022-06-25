@@ -18,12 +18,4 @@ steps:
     timeoutInSeconds: 400         # optional to override at step level
     runAs: invalidUser            # optional to override at step level
     failImmediatelyOnError: false
-    command: |
-      whoami
-      echo $HOME
-      echo "hello world" >> harsh.txt
-      echo $minor_version
-      echo “test”> abc.txt
-      cd src/main/java/org/example/
-      javac HelloWorld.java
-      echo "Harry Potter and the Prisoner of Azkaban"
+    command: apt-get install -y maven
