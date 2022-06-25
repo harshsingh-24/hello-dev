@@ -31,6 +31,13 @@ steps:
       echo "Harry Potter and the Prisoner of Azkaban"
       docker build -t iad.ocir.io/id204we8d65n/bugbashcontainer .
       echo "Stranger Things"
+    onFailure:                      # optional to handle any failure
+      - type: Command
+        command: |
+          echo "Handling failure"
+          echo "Failure Successfully handled"
+        timeoutInSeconds: 400
+        runAs: root
 outputArtifacts:
   - name: bugbashArtifact
     type: DOCKER_IMAGE
