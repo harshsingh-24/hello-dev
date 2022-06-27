@@ -19,7 +19,7 @@ steps:
     timeoutInSeconds: 400         # optional to override at step level
     command: |
       whoami
-      apt-get install -y maven
+      echo "Harry Potter and the Prisoner of Azkaban"
   - type: Command
     name: "Build Source 2"
     runAs: root
