@@ -23,9 +23,9 @@ steps:
       whoami
       apt-get install -y maven
   - type: Command
-      name: "Build Source 2"
-      shell: bash
-      runAs: root
-      timeoutInSeconds: 400
-      failImmediatelyOnError: false
-      command: whoami
+    name: "Build Source 2"
+    shell: bash
+    runAs: root
+    timeoutInSeconds: 400
+    failImmediatelyOnError: false
+    command: whoami
