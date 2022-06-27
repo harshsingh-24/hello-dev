@@ -1,7 +1,9 @@
+# Case when runAs is a valid user in every step
+
 version: 0.1              # REQUIRED
 component: build
 timeoutInSeconds: 6000    # timeoutInSeconds spec level.
-runAs: root               # runas(root, ocarun) default linux user. can be overridden at every step level.
+runAs: ocarun             # runas(root, ocarun) default linux user. can be overridden at every step level.
 shell: bash               # shell(bash, sh, ksh) default shell type. can be overridden at every step level.
 env:
   variables:
@@ -16,6 +18,14 @@ steps:
     name: "Build Source 1"        # optional. its friendly display name.
     shell: bash                   # optional to override at step level
     timeoutInSeconds: 400         # optional to override at step level
-    runAs: invalidUser            # optional to override at step level
     failImmediatelyOnError: false
-    command: apt-get install -y maven
+    command: |
+      whoami
+      apt-get install -y maven
+  - type: Command
+      name: "Build Source 2"
+      shell: bash
+      runAs: root
+      timeoutInSeconds: 400
+      failImmediatelyOnError: false
+      command: whoami
