@@ -16,14 +16,12 @@ env:
 steps:
   - type: Command                 # required. predefined, currently supporting [Command | DockerRun]
     name: "Build Source 1"        # optional. its friendly display name.
-    shell: bash                   # optional to override at step level
     timeoutInSeconds: 400         # optional to override at step level
     command: |
       whoami
       apt-get install -y maven
   - type: Command
     name: "Build Source 2"
-    shell: bash
     runAs: root
     timeoutInSeconds: 400
     failImmediatelyOnError: false
