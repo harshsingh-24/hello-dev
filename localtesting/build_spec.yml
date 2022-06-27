@@ -2,7 +2,7 @@
 
 version: 0.1              # REQUIRED
 component: build
-timeoutInSeconds: 6000    # timeoutInSeconds spec level.
+timeoutInSeconds: 10000    # timeoutInSeconds spec level.
 runAs: ocarun             # runas(root, ocarun) default linux user. can be overridden at every step level.
 shell: bash               # shell(bash, sh, ksh) default shell type. can be overridden at every step level.
 env:
@@ -16,12 +16,13 @@ env:
 steps:
   - type: Command                 # required. predefined, currently supporting [Command | DockerRun]
     name: "Build Source 1"        # optional. its friendly display name.
-    timeoutInSeconds: 400         # optional to override at step level
+    timeoutInSeconds: 10000         # optional to override at step level
     command: |
       whoami
       echo "Harry Potter and the Prisoner of Azkaban"
+      sleep 10000
   - type: Command
     name: "Build Source 2"
     runAs: root
-    timeoutInSeconds: 400
+    timeoutInSeconds: 10000
     command: whoami
