@@ -18,7 +18,6 @@ steps:
     name: "Build Source 1"        # optional. its friendly display name.
     shell: bash                   # optional to override at step level
     timeoutInSeconds: 400         # optional to override at step level
-    failImmediatelyOnError: false
     command: |
       whoami
       apt-get install -y maven
