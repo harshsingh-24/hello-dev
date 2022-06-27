@@ -24,5 +24,4 @@ steps:
     name: "Build Source 2"
     runAs: root
     timeoutInSeconds: 400
-    failImmediatelyOnError: false
     command: whoami
