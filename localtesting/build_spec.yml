@@ -3,7 +3,7 @@
 version: 0.1              # REQUIRED
 component: build
 timeoutInSeconds: 10000    # timeoutInSeconds spec level.
-runAs: ocaru             # runas(root, ocarun) default linux user. can be overridden at every step level.
+runAs: ocarun             # runas(root, ocarun) default linux user. can be overridden at every step level.
 shell: bash               # shell(bash, sh, ksh) default shell type. can be overridden at every step level.
 env:
   variables:
@@ -23,6 +23,6 @@ steps:
       echo "Harry Potter and the Prisoner of Azkaban"
   - type: Command
     name: "Build Source 2"
-    runAs: roo
+    runAs: root
     timeoutInSeconds: 10000
     command: whoami
