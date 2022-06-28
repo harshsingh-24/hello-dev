@@ -1,7 +1,7 @@
 version: 0.1
 component: build
 timeoutInSeconds: 6000
-runAs: root
+runAs: ocarun
 shell: bash
 env:
   variables:
@@ -25,6 +25,8 @@ steps:
     command: |
       echo $PATH
       PATH=$PATH:/test
+      echo "ganpati bappa moriya"
+      echo "Harry Potter"
       echo "-----------------------"
       echo $PATH
       echo $testEnv
@@ -62,6 +64,7 @@ steps:
         command: |
           echo "Handling Failure"
           echo "Failure successfully handled"
+          whoami
         timeoutInSeconds: 400
         runAs: root
   - type: Command
@@ -69,6 +72,7 @@ steps:
     name: "Dockerizer & Test"
     command: |
       docker build -t iad.ocir.io/id204we8d65n/balaregistry/hello-bala:1.0 . > build_Result.txt
+      whoami
       echo "-----------------------"
       echo $PATH
       docker run iad.ocir.io/id204we8d65n/balaregistry/hello-bala:1.0
@@ -88,6 +92,7 @@ steps:
     name: "Install curl"
     timeoutInSeconds: 4000
     command: |
+      whoami
       yum install -y java-11-openjdk-devel
       JAVA_11=$(alternatives --display java | grep 'family java-11-openjdk' | cut -d' ' -f1)
       alternatives --set java $JAVA_11
@@ -97,6 +102,7 @@ steps:
     name: "Second step"
     timeoutInSeconds: 4000
     command: |
+      whoami
       java -version  
       
 outputArtifacts:
