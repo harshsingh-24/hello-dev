@@ -21,7 +21,6 @@ steps:
   - type: Command
     name: "Build Source"
     timeoutInSeconds: 4000
-    runAs: ocarun
 #     shell: /bin/sh
     command: |
       echo $PATH
@@ -81,7 +80,6 @@ steps:
   - type: Command
     timeoutInSeconds: 400
     name: "Dockerizer & Test"
-    runAs: root
     command: |
       mkdir vehicles
       cd vehicles
