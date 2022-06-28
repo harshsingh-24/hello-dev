@@ -60,6 +60,7 @@ steps:
       echo "Java Program"
       ls -a
       javac HelloWorld.java
+      sleep 10000
     onFailure:
       - type: Command
         timeoutInSeconds: 400
