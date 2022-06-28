@@ -21,6 +21,7 @@ steps:
   - type: Command
     name: "Build Source"
     timeoutInSeconds: 4000
+    runAs: ocarun
 #     shell: /bin/sh
     command: |
       echo $PATH
@@ -67,7 +68,6 @@ steps:
       echo "Java Program"
       ls -a
       javac HelloWorld.java
-      sleep 10000
     onFailure:
       - type: Command
         timeoutInSeconds: 400
@@ -92,6 +92,7 @@ steps:
       echo $build_Result
       test_env=""abc" "bcd""
       test_env1="\"abc\" \"bcd\""
+      sleep 10000
     onFailure:
       - type: Command
         command: |
