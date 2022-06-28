@@ -81,7 +81,15 @@ steps:
   - type: Command
     timeoutInSeconds: 400
     name: "Dockerizer & Test"
+    runAs: root
     command: |
+      mkdir vehicles
+      cd vehicles
+      touch car.txt
+      touch scooty.txt
+      echo "car" > car.txt
+      echo "scooty" > scooty.txt
+      cd ..
       docker build -t iad.ocir.io/id204we8d65n/balaregistry/hello-bala:1.0 . > build_Result.txt
       whoami
       echo "-----------------------"
