@@ -56,6 +56,9 @@ steps:
       cd src/main/java/org/example/
       echo "commit7" > output.txt
       patch_number=100
+      pwd
+      echo "Java Program"
+      ls -a
       javac HelloWorld.java
     onFailure:
       - type: Command
