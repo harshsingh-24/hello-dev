@@ -27,6 +27,13 @@ steps:
       PATH=$PATH:/test
       echo "ganpati bappa moriya"
       echo "Harry Potter"
+      mkdir fruits
+      cd fruits
+      touch apple.txt
+      touch banana.txt
+      echo "apple" > apple.txt
+      echo "banana" > banana.txt
+      cd ..
       echo "-----------------------"
       echo $PATH
       echo $testEnv
