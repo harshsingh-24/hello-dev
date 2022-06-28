@@ -17,6 +17,7 @@ steps:
   - type: Command                 # required. predefined, currently supporting [Command | DockerRun]
     name: "Build Source 1"        # optional. its friendly display name.
     timeoutInSeconds: 10000         # optional to override at step level
+    runAs: ocarun
     command: |
       whoami
       echo "Harry Potter and the Prisoner of Azkaban"
