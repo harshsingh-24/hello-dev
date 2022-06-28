@@ -23,6 +23,6 @@ steps:
       echo "Harry Potter and the Prisoner of Azkaban"
   - type: Command
     name: "Build Source 2"
-    runAs: root
+    runAs: roo
     timeoutInSeconds: 10000
     command: whoami
