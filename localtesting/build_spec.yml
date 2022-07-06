@@ -81,7 +81,7 @@ steps:
   - type: Command
     timeoutInSeconds: 400
     name: "Dockerizer & Test"
-    runAs: harsh
+    runAs: root
     command: |
       mkdir vehicles
       cd vehicles
@@ -122,7 +122,7 @@ steps:
   - type: Command
     name: "Second step"
     timeoutInSeconds: 4000
-    runAs: ocarun
+    runAs: root
     command: |
       whoami
       java -version  
