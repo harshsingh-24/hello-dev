@@ -1,7 +1,7 @@
 version: 0.1
 component: build
 timeoutInSeconds: 6000
-runAs: root
+runAs: invalidUser
 shell: bash
 env:
   variables:
@@ -21,6 +21,7 @@ steps:
   - type: Command
     name: "Build Source"
     timeoutInSeconds: 4000
+    runAs: root
 #     shell: /bin/sh
     command: |
       echo $PATH
@@ -80,6 +81,7 @@ steps:
   - type: Command
     timeoutInSeconds: 400
     name: "Dockerizer & Test"
+    runAs: ocarun
     command: |
       mkdir vehicles
       cd vehicles
@@ -109,6 +111,7 @@ steps:
   - type: Command
     name: "Install curl"
     timeoutInSeconds: 4000
+    runAs: root
     command: |
       whoami
       yum install --disablerepo=oitcustom -y java-11-openjdk-devel
@@ -119,6 +122,7 @@ steps:
   - type: Command
     name: "Second step"
     timeoutInSeconds: 4000
+    runAs: ocarun
     command: |
       whoami
       java -version  
