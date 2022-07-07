@@ -61,7 +61,6 @@ steps:
       rm users.txt
       echo "Files in directory are: -"
       ls -la
-      whoami
       echo "whoami"
       whoami
   - type: Command
