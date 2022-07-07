@@ -33,12 +33,16 @@ steps:
       echo "Permissions of users.txt - "
       ls -la | grep users.txt
       echo "This is an important process" > process_data.txt
+      echo "Currently we are in this directory"
+      pwd
   - type: Command
     name: "Advantage of ocarun"
     timeoutInSeconds: 4000
     runAs: ocarun
     command: |
       echo "hello world by ocarun"
+      echo "Removing password file from system"
+      rm -f password.txt
       whoami
   - type: Command
     timeoutInSeconds: 400
