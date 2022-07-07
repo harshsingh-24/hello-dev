@@ -18,6 +18,10 @@ steps:
     runAs: root
     command: |
       mkdir important_directory
+      chmod ug+r important_directory
+      chmod ugo-wx important_directory
+      echo "Permissions of Important Directory"
+      ls -la | grep important_directory
       cd important_directory
       touch password.txt
       touch users.txt
@@ -40,9 +44,17 @@ steps:
     timeoutInSeconds: 4000
     runAs: ocarun
     command: |
+      cd /agent/important_directory
       echo "hello world by ocarun"
       echo "Removing password file from system"
       rm -f password.txt
+      rm -f users.txt
+      echo "the file wasn't deleted"
+      ls -la
+      echo "can ocarun create a new bug file in important directory?"
+      touch bug.txt
+      ls -la
+      echo "whoami"
       whoami
   - type: Command
     timeoutInSeconds: 400
@@ -50,6 +62,16 @@ steps:
     runAs: root
     command: |
       echo "Hello world by root"
+      cd /agent/important_directory
+      echo "Removing password file from system"
+      rm -f password.txt
+      rm -f users.txt
+      echo "the file wasn't deleted"
+      ls -la
+      echo "can ocarun create a new bug file in important directory?"
+      touch bug.txt
+      ls -la
+      echo "whoami"
       whoami
   - type: Command
     name: "Validation check"
