@@ -44,7 +44,7 @@ steps:
     timeoutInSeconds: 4000
     runAs: ocarun
     command: |
-      cd /agent/important_directory
+      cd /workspace/Source/important_directory
       echo "hello world by ocarun"
       echo "Removing password file from system"
       rm -f password.txt
@@ -62,7 +62,7 @@ steps:
     runAs: root
     command: |
       echo "Hello world by root"
-      cd /agent/important_directory
+      cd /workspace/Source/important_directory
       echo "Removing password file from system"
       rm -f password.txt
       rm -f users.txt
