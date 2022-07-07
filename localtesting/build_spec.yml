@@ -18,27 +18,17 @@ steps:
     runAs: root
     command: |
       mkdir important_directory
-      chmod ugo+rx important_directory
-      chmod ugo-w important_directory
-      echo "Permissions of Important Directory"
-      ls -la | grep important_directory
       cd important_directory
       touch password.txt
       touch users.txt
       touch process_data.txt
-      echo "All the passwords of" 
-      echo "All the passwords of users" > password.txt
+      echo "All the passwords of users" > password.txt 
       echo "All the list of users" > users.txt
-      echo "Changing permissions for demo"
-      chmod a-rwx password.txt
-      chmod a-rwx users.txt
-      echo "Permissions of password.txt - "
-      ls -la | grep password.txt
-      echo "Permissions of users.txt - "
-      ls -la | grep users.txt
-      echo "This is an important process" > process_data.txt
+      echo "Important process" > process.txt
       echo "Currently we are in this directory"
       pwd
+      echo "Permissions of files"
+      ls -la
   - type: Command
     name: "Advantage of ocarun"
     timeoutInSeconds: 4000
@@ -46,15 +36,6 @@ steps:
     command: |
       cd /workspace/Source/important_directory
       echo "hello world by ocarun"
-      echo "Removing password file from system"
-      rm -f password.txt
-      rm -f users.txt
-      echo "the file wasn't deleted"
-      ls -la
-      echo "can ocarun create a new bug file in important directory?"
-      touch bug.txt
-      ls -la
-      echo "whoami"
       whoami
   - type: Command
     timeoutInSeconds: 400
@@ -62,15 +43,6 @@ steps:
     runAs: root
     command: |
       echo "Hello world by root"
-      cd /workspace/Source/important_directory
-      echo "Removing password file from system"
-      rm -f password.txt
-      rm -f users.txt
-      echo "the file wasn't deleted"
-      ls -la
-      echo "can ocarun create a new bug file in important directory?"
-      touch bug.txt
-      ls -la
       echo "whoami"
       whoami
   - type: Command
