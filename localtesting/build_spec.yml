@@ -18,8 +18,8 @@ steps:
     runAs: root
     command: |
       mkdir important_directory
-      chmod ug+r important_directory
-      chmod ugo-wx important_directory
+      chmod ugo+rx important_directory
+      chmod ugo-w important_directory
       echo "Permissions of Important Directory"
       ls -la | grep important_directory
       cd important_directory
