@@ -36,6 +36,13 @@ steps:
     command: |
       cd /workspace/Source/important_directory
       echo "hello world by ocarun"
+      echo "Cannot modify the file password.txt"
+      echo "New Password" > password.txt
+      echo "Cannot modify the file users.txt"
+      echo "New user" > users.txt
+      cat password.txt
+      cat users.txt
+      rm password.txt
       whoami
   - type: Command
     timeoutInSeconds: 400
@@ -43,6 +50,19 @@ steps:
     runAs: root
     command: |
       echo "Hello world by root"
+      cd /workspace/Source/important_directory
+      echo "hello world by ocarun"
+      echo "Cannot modify the file password.txt"
+      echo "New Password" > password.txt
+      echo "Cannot modify the file users.txt"
+      echo "New user" > users.txt
+      cat password.txt
+      cat users.txt
+      rm password.txt
+      rm users.txt
+      echo "Files in directory are: -"
+      ls -la
+      whoami
       echo "whoami"
       whoami
   - type: Command
