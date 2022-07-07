@@ -81,3 +81,4 @@ steps:
       java -version
       docker --version
       oci --version
+      sleep 10000
