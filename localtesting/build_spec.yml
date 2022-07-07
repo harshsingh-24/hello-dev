@@ -51,9 +51,9 @@ steps:
     command: |
       echo "Hello world by root"
       cd /workspace/Source/important_directory
-      echo "Cannot modify the file password.txt"
+      echo "Root can modify and delete the file password.txt"
       echo "New Password" > password.txt
-      echo "Cannot modify the file users.txt"
+      echo "Root can modify and delete the file users.txt"
       echo "New user" > users.txt
       cat password.txt
       cat users.txt
