@@ -51,7 +51,6 @@ steps:
     command: |
       echo "Hello world by root"
       cd /workspace/Source/important_directory
-      echo "hello world by ocarun"
       echo "Cannot modify the file password.txt"
       echo "New Password" > password.txt
       echo "Cannot modify the file users.txt"
