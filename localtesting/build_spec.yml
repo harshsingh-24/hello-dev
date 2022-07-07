@@ -19,132 +19,45 @@ inputArtifacts:
 
 steps:
   - type: Command
-    name: "Build Source"
+    name: "SetUp"
     timeoutInSeconds: 4000
     runAs: root
-#     shell: /bin/sh
     command: |
-      echo $PATH
-      PATH=$PATH:/test
-      echo "ganpati bappa moriya"
-      echo "Harry Potter"
-      mkdir fruits
-      cd fruits
-      touch apple.txt
-      touch banana.txt
-      echo "apple" > apple.txt
-      echo "banana" > banana.txt
-      cd ..
-      echo "-----------------------"
-      echo $PATH
-      echo $testEnv
-      oci os ns get
-      export testEnv=5.0
-      echo OCI_STAGE_ID: $OCI_STAGE_ID
-      echo OCI_PIPELINE_ID: $OCI_PIPELINE_ID
-      echo OCI_BUILD_RUN_ID: $OCI_BUILD_RUN_ID
-      echo OCI_TRIGGER_COMMIT_HASH: $OCI_TRIGGER_COMMIT_HASH
-      echo OCI_TRIGGER_SOURCE_BRANCH_NAME: $OCI_TRIGGER_SOURCE_BRANCH_NAME
-      echo OCI_TRIGGER_SOURCE_URL: $OCI_TRIGGER_SOURCE_URL
-      echo OCI_TRIGGER_EVENT_TYPE: $OCI_TRIGGER_EVENT_TYPE
-      echo OCI_PRIMARY_SOURCE_DIR: $OCI_PRIMARY_SOURCE_DIR
-      echo OCI_WORKSPACE_DIR: $OCI_WORKSPACE_DIR
-      echo OCI_BUILD_STAGE_NAME: $OCI_BUILD_STAGE_NAME
-      echo OCI_PRIMARY_SOURCE_NAME: $OCI_PRIMARY_SOURCE_NAME
-      export minor_version=135
-      echo "hello world"
+      mkdir important_directory
+      cd important_directory
+      touch password.txt
+      touch users.txt
+      touch process_data.txt
+      echo "All the passwords of 
+      echo "All the passwords of users" > password.txt
+      echo "All the list of users" > users.txt
+      echo "Changing permissions for demo"
+      chmod a-rwx password.txt
+      chmod a-rwx users.txt
+      echo "Permissions of password.txt - "
+      ls -la | grep password.txt
+      echo "Permissions of users.txt - "
+      ls -la | grep users.txt
+      echo "This is an important process" > process_data.txt
+  - type: Command
+    name: "Advantage of ocarun"
+    timeoutInSeconds: 4000
+    runAs: ocarun
+    command: |
+      echo "hello world by ocarun"
       whoami
-      ls -lart
-      git branch
-      df -h > output1.txt
-      mvn clean install
-      ls -lart
-      rm -rf target/
-      ls -lart
-      cd src/main/java/org/example/
-      echo "commit7" > output.txt
-      patch_number=100
-      pwd
-      echo "Java Program"
-      ls -a
-      javac HelloWorld.java
-      sleep 10000
-    onFailure:
-      - type: Command
-        timeoutInSeconds: 400
-#         shell: /bin/sh
-        command: |
-          echo "Handling Failure"
-          echo "Failure successfully handled"
-          whoami
-        timeoutInSeconds: 400
-        runAs: root
   - type: Command
     timeoutInSeconds: 400
-    name: "Dockerizer & Test"
+    name: "Disadvantage of running as root user"
     runAs: root
     command: |
-      mkdir vehicles
-      cd vehicles
-      touch car.txt
-      touch scooty.txt
-      echo "car" > car.txt
-      echo "scooty" > scooty.txt
-      cd ..
-      docker build -t iad.ocir.io/id204we8d65n/balaregistry/hello-bala:1.0 . > build_Result.txt
+      echo "Hello world by root"
       whoami
-      echo "-----------------------"
-      echo $PATH
-      docker run iad.ocir.io/id204we8d65n/balaregistry/hello-bala:1.0
-      build_Result=`cat build_Result.txt`
-      cat build_Result.txt
-      echo $build_Result
-      test_env=""abc" "bcd""
-      test_env1="\"abc\" \"bcd\""
-      sleep 10000
-    onFailure:
-      - type: Command
-        command: |
-          echo "Handling Failure"
-          echo "Failure successfully handled"
-        timeoutInSeconds: 400
-        runAs: root
   - type: Command
-    name: "Install curl"
+    name: "Validation check"
     timeoutInSeconds: 4000
-    runAs: root
+    runAs: ocarun
     command: |
-      whoami
-      yum install --disablerepo=oitcustom -y java-11-openjdk-devel
-      JAVA_11=$(alternatives --display java | grep 'family java-11-openjdk' | cut -d' ' -f1)
-      alternatives --set java $JAVA_11
-      docker save iad.ocir.io/id204we8d65n/balaregistry/hello-bala:1.0 -o docker-image.tar
       java -version
-  - type: Command
-    name: "Second step"
-    timeoutInSeconds: 4000
-    runAs: root
-    command: |
-      whoami
-      java -version  
-      
-outputArtifacts:
-  - name: output1
-    type: BINARY
-    location: ${OCI_WORKSPACE_DIR}/Source/output1.txt
-  - name: output2
-    type: BINARY
-    location: docker-image.tar
-#   - name: output
-#     type: BINARY
-#     location: src/main/java/org/example/output.txt
-#   - name: hello-dev-jar
-#     type: BINARY
-#     artifactParams:
-#       testKey: testVal
-#       testKey1: ${testEnv}
-#       testKey2: ${invalidVar}
-#     location: src/main/java/org/example/HelloWorld.class
-  - name: hello-dev-image
-    type: DOCKER_IMAGE
-    location: iad.ocir.io/id204we8d65n/balaregistry/hello-bala:1.0
+      docker --version
+      oci --version
