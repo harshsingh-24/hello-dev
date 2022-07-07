@@ -6,12 +6,6 @@ shell: bash
 env:
   variables:
     "testEnv" : "testValue1"
-  exportedVariables:
-    - testEnv
-    - patch_number
-    - build_Result
-    - test_env
-    - test_env1
 
 inputArtifacts:
   - name: hello-dev-jar
@@ -28,7 +22,7 @@ steps:
       touch password.txt
       touch users.txt
       touch process_data.txt
-      echo "All the passwords of 
+      echo "All the passwords of" 
       echo "All the passwords of users" > password.txt
       echo "All the list of users" > users.txt
       echo "Changing permissions for demo"
